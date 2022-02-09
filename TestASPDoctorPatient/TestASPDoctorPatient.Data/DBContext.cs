@@ -16,10 +16,12 @@ namespace TestASPDoctorPatient.Data
         public DbSet<Cabinet> Cabinets { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Cabinet>()
+                .HasMany(c => c.Doctors)
+                .WithOne(d => d.Cabinet);
+        }
 
     }
 }

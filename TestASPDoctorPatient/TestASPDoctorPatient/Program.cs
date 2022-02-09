@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using TestASPDoctorPatient.Data;
 using TestASPDoctorPatient.Data.Models;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace TestASPDoctorPatient
 {

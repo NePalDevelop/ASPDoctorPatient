@@ -6868,7 +6868,7 @@ jQuery.extend( {
 		"flexGrow": true,
 		"flexShrink": true,
 		"fontWeight": true,
-		"gridArea": true,
+		"grAreaID": true,
 		"gridColumn": true,
 		"gridColumnEnd": true,
 		"gridColumnStart": true,

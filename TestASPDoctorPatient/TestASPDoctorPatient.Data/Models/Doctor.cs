@@ -13,11 +13,14 @@ namespace TestASPDoctorPatient.Data.Models
         public string LastName { get; set; }
         public string Patronymic { get; set; }
 
-        public int IDCabinet { get; set; }
+        public int CabinetID { get; set; }
+        public Cabinet Cabinet { get; set; }
 
-        public int? IDArea { get; set; }
+        public int? AreaID { get; set; }
+        public ServiceArea ServiceArea { get; set; }
 
-        public int IDSpec { get; set; } 
+        public int SpecID { get; set; } 
+        public Specialization Specialization { get; set; }
 
     }
 }
