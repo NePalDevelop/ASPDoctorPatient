@@ -9,7 +9,7 @@ using TestASPDoctorPatient.Data;
 using TestASPDoctorPatient.Data.Models;
 using TestASPDoctorPatient.Data.Stores;
 
-namespace TestASPDoctorPatient
+namespace TestASPDoctorPatient.Controllers
 {
     public class DoctorsController : Controller
     {
@@ -36,8 +36,7 @@ namespace TestASPDoctorPatient
                 return NotFound();
             }
 
-            var doctor = await _context.Doctors
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var doctor = await _doctorStore.GetDoctor(id);
             if (doctor == null)
             {
                 return NotFound();

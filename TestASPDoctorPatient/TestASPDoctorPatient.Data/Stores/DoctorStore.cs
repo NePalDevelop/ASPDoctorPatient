@@ -21,32 +21,34 @@ namespace TestASPDoctorPatient.Data.Stores
         // GET: Doctors
         public async Task<IEnumerable<Doctor>> GetDoctors()
         {
-            //var query = from d in _context.Doctors
-            //            join c in _context.Cabinets
-            //                on d.CabinetID equals c.ID
-            //            select d
 
-            //            new Doctor
-            //            {
-            //                ID = d.ID,
-            //                FirstName = d.FirstName,
-            //                LastName = d.LastName,
-            //                Patronymic = d.Patronymic,
-            //                CabinetID = d.CabinetID,
-            //                Cabinet = new Cabinet { ID = c.ID, Number = c.Number },
-            //                AreaID = d.AreaID,
-            //                SpecID = d.SpecID
-            //            };
-            //var doctors =  _context.Doctors
-            //    .Include(d => d.Cabinet)
-            //    .Where();
+            var query = _context.Doctors
+                .Include(d => d.Cabinet)
+                .Include(a => a.Area)
+                .Include(s => s.Spec);
 
-
-
-            //  return await query.ToListAsync();
-            var query = _context.Doctors.Include(d => d.Cabinet);
             return await query.ToListAsync();
-//            return doctors;
+
+        }
+        // GET: Doctor (ID)
+        public async Task<Doctor> GetDoctor(int? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+
+            var doctor = await _context.Doctors
+                .Include(d => d.Cabinet)
+                .Include(a => a.Area)
+                .Include(s => s.Spec)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (doctor == null)
+            {
+                return null;
+            }
+
+            return doctor;
         }
 
     }

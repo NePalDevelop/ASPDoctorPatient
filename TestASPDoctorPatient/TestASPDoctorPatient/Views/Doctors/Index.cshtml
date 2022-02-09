@@ -26,10 +26,10 @@
                 @Html.DisplayNameFor(model => model.Cabinet.Number)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AreaID)
+                @Html.DisplayNameFor(model => model.Area.Number)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SpecID)
+                @Html.DisplayNameFor(model => model.Spec.Name)
             </th>
             <th></th>
         </tr>
@@ -50,10 +50,10 @@
                 @Html.DisplayFor(modelItem => item.Cabinet.Number)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AreaID)
+                @Html.DisplayFor(modelItem => item.Area.Number)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SpecID)
+                @Html.DisplayFor(modelItem => item.Spec.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
