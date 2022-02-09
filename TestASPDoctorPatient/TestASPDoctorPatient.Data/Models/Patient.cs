@@ -20,7 +20,7 @@ namespace TestASPDoctorPatient.Data.Models
         
         public Gender? Gender { get; set; }
 
-        public int AreaID { get; set; }
+        public int? AreaID { get; set; }
         
 
     }

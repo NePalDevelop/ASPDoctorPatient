@@ -13,7 +13,7 @@ namespace TestASPDoctorPatient.Data.Models
         public string LastName { get; set; }
         public string Patronymic { get; set; }
 
-        public int CabinetID { get; set; }
+        public int? CabinetID { get; set; }
         public Cabinet Cabinet { get; set; }
 
         public int? AreaID { get; set; }

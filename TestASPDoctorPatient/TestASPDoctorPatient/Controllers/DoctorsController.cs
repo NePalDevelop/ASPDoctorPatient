@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TestASPDoctorPatient.Helper;
 using TestASPDoctorPatient.Data;
 using TestASPDoctorPatient.Data.Models;
 using TestASPDoctorPatient.Data.Stores;
@@ -25,7 +26,16 @@ namespace TestASPDoctorPatient.Controllers
         // GET: Doctors
         public async Task<IActionResult> Index()
         {
-            return View(await _doctorStore.GetDoctors());
+            var doctors = await _doctorStore.GetDoctors();
+
+            List<Models.Doctor> docs =  new List < Models.Doctor >();
+
+            foreach (var d in doctors)
+            {
+                docs.Add(Mapper.MapFromData(d));
+            }
+
+            return View(docs);
         }
 
         // GET: Doctors/Details/5
