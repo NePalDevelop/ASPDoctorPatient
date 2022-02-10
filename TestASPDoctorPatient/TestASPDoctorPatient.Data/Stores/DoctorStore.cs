@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TestASPDoctorPatient.Data.Models;
@@ -21,25 +18,7 @@ namespace TestASPDoctorPatient.Data.Stores
         // Возвращает список всех врачей 
         // список упорядочен по фамилии
 
-        public async Task<IEnumerable<Doctor>> GetDoctors() => await GetDoctors(-1, -1);
-
-        //{
-
-        //    //var query = _context.Doctors
-        //    //    .Include(d => d.Cabinet)
-        //    //    .Include(a => a.Area)
-        //    //    .Include(s => s.Spec)
-        //    //    .OrderBy(d => d.LastName);
-
-        //    //return await query.ToListAsync();
-        //    //return await GetDoctors(-1, -1);
-
-        //}
-
-
-        // Возвращает список врачей начиная с позции idStart
-        // количество записей = number, список упорядочен по фамилии
-        public async Task<IEnumerable<Doctor>> GetDoctors(int idStart, int number)
+        public async Task<IEnumerable<Doctor>> GetDoctors()
         {
 
             var query = _context.Doctors
@@ -48,8 +27,25 @@ namespace TestASPDoctorPatient.Data.Stores
                 .Include(s => s.Spec)
                 .OrderBy(d => d.LastName);
 
-            var count = await query.CountAsync();
-            var doctors = await query.Skip((idStart <= 0 ? 1 : idStart) - 1).Take(number <= 0 ? count : number).ToListAsync();
+            return await query.ToListAsync();
+
+        }
+
+
+
+
+        // Возвращает список врачей пропуская skipID позиций
+        // количество записей = number, список упорядочен по фамилии
+        public async Task<IEnumerable<Doctor>> GetDoctors(int skipID, int number)
+        {
+
+            var query = _context.Doctors
+                .Include(c => c.Cabinet)
+                .Include(a => a.Area)
+                .Include(s => s.Spec)
+                .OrderBy(d => d.LastName);
+
+            var doctors = await query.Skip(skipID).Take(number).ToListAsync();
 
             return doctors;
 
@@ -65,13 +61,15 @@ namespace TestASPDoctorPatient.Data.Stores
             }
 
             var doctor = await _context.Doctors
-                .Include(d => d.Cabinet)
+                .Include(c => c.Cabinet)
                 .Include(a => a.Area)
                 .Include(s => s.Spec)
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(d => d.ID == id);
 
             return doctor;
         }
+        
+        // Добавление нового врача
 
         public async Task<Doctor> AddDoctor(Doctor doctor)
         {
@@ -88,6 +86,8 @@ namespace TestASPDoctorPatient.Data.Stores
             return doctor;
         }
 
+        // Изменение данных у врача
+
         public async Task<Doctor> PutDoctor(Doctor doctor)
         {
 
@@ -102,6 +102,8 @@ namespace TestASPDoctorPatient.Data.Stores
 
             return doctor;
         }
+
+        // Удаление врача 
 
         public async Task DeleteDoctor(Doctor doctor)
         {

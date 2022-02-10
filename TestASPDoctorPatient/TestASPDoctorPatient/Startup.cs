@@ -30,6 +30,7 @@ namespace TestASPDoctorPatient
             services.AddDbContext<DPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<DoctorStore>();
+            services.AddScoped<PatientStore>();
 
 //            services.AddDatabaseDeveloperPageExceptionFilter();
 

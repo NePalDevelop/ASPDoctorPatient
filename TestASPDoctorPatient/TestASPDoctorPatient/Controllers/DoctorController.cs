@@ -14,13 +14,13 @@ namespace TestASPDoctorPatient.Controllers
     [ApiController]
     public class DoctorController : ControllerBase
     {
- 
+
         private readonly DoctorStore _doctorStore;
 
         public DoctorController(DoctorStore doctor)
         {
             _doctorStore = doctor;
-         }
+        }
 
         // GET: api/<DoctorController>
         public async Task<ActionResult<IEnumerable<Doctor>>> Get()
@@ -31,7 +31,7 @@ namespace TestASPDoctorPatient.Controllers
 
             foreach (var d in doctors)
             {
-                docs.Add(Mapper.MapFromData(d));
+                docs.Add(Mapper.MapDoctorFromData(d));
             }
 
             return docs;
@@ -50,15 +50,45 @@ namespace TestASPDoctorPatient.Controllers
                 return NotFound();
             }
 
-            return Mapper.MapFromData(doctor);
+            return Mapper.MapDoctorFromData(doctor);
         }
 
+        //// GET api/<DoctorController>/5/5
+        //[HttpGet("{startid}/{number}")]
+        //public async Task<ActionResult<IEnumerable<Doctor>>> Get(int startid, int number)
+        //{
+
+        //    var doctors = await _doctorStore.GetDoctors(startid, number);
+
+        //    if (doctors == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    List<Doctor> docs = new();
+
+        //    foreach (var d in doctors)
+        //    {
+        //        docs.Add(Mapper.MapFromData(d));
+        //    }
+
+        //    return docs;
+        //}
+
         // GET api/<DoctorController>/5/5
-        [HttpGet("{startid}/{number}")]
-        public async Task<ActionResult<IEnumerable<Doctor>>> Get(int startid, int number)
+        // Возвращает постранично список докторов
+        // Список упорядочен по фамилии - SecondName
+        // Входные параметры pageIndex - номер запрашиваемой страницы
+        // pageSize - количество строк на странице
+
+        [HttpGet("{pageIndex}/{pageSize}")]
+        public async Task<ActionResult<IEnumerable<Doctor>>> PaginatedGetDoctor(int pageIndex, int pageSize)
         {
 
-            var doctors = await _doctorStore.GetDoctors(startid, number);
+            pageIndex = pageIndex < 1 ? 1 : pageIndex;
+            pageSize = pageSize < 1 ? 5 : pageSize;
+
+            var doctors = await _doctorStore.GetDoctors((pageIndex - 1) * pageSize, pageSize);
 
             if (doctors == null)
             {
@@ -69,7 +99,7 @@ namespace TestASPDoctorPatient.Controllers
 
             foreach (var d in doctors)
             {
-                docs.Add(Mapper.MapFromData(d));
+                docs.Add(Mapper.MapDoctorFromData(d));
             }
 
             return docs;
@@ -77,17 +107,18 @@ namespace TestASPDoctorPatient.Controllers
 
 
 
+
         // POST api/<DoctorController>
         [HttpPost]
 
-        public async Task<ActionResult<Doctor>> Create([FromBody] Doctor doctor)
+        public async Task<ActionResult<Doctor>> CreateDoctor([FromBody] Doctor doctor)
         {
 
             if (ModelState.IsValid)
             {
-                Data.Models.Doctor _doctor = Mapper.MapToData(doctor);
+                Data.Models.Doctor _doctor = Mapper.MapDoctorToData(doctor);
                 _doctor = await _doctorStore.AddDoctor(_doctor);
-                return Mapper.MapFromData(_doctor);
+                return Mapper.MapDoctorFromData(_doctor);
             }
             return doctor;
         }
@@ -95,13 +126,13 @@ namespace TestASPDoctorPatient.Controllers
 
         // PUT api/<DoctorController>/5
         [HttpPut]
-        public async Task<ActionResult<Doctor>> Put([FromBody] Doctor doctor)
+        public async Task<ActionResult<Doctor>> PutDoctor([FromBody] Doctor doctor)
         {
             if (ModelState.IsValid)
             {
-                Data.Models.Doctor _doctor = Mapper.MapToData(doctor);
+                Data.Models.Doctor _doctor = Mapper.MapDoctorToData(doctor);
                 _doctor = await _doctorStore.PutDoctor(_doctor);
-                return Mapper.MapFromData(_doctor);
+                return Mapper.MapDoctorFromData(_doctor);
             }
             return doctor;
 
@@ -109,7 +140,7 @@ namespace TestASPDoctorPatient.Controllers
 
         // DELETE api/<DoctorController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> DeleteDoctor(int id)
         {
             var doctor = await _doctorStore.GetDoctor(id);
 
@@ -120,6 +151,6 @@ namespace TestASPDoctorPatient.Controllers
             return Ok();
         }
 
-        
+
     }
 }

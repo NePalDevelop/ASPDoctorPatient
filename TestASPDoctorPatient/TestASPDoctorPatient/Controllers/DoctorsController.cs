@@ -32,10 +32,8 @@ namespace TestASPDoctorPatient.Controllers
 
             foreach (var d in doctors)
             {
-                docs.Add(Mapper.MapFromData(d));
+                docs.Add(Mapper.MapDoctorFromData(d));
             }
-            
-//            docs = docs.OrderBy(d => d.LastName).ToList();
 
             return View(docs);
         }
