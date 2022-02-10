@@ -23,13 +23,13 @@
                 @Html.DisplayNameFor(model => model.Patronymic)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CabinetNumber)
+                @Html.DisplayNameFor(model => model.Cabinet.Number)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AreaNumber)
+                @Html.DisplayNameFor(model => model.Area.Number)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SpecializationName)
+                @Html.DisplayNameFor(model => model.Spec.Name)
             </th>
             <th></th>
         </tr>
@@ -47,13 +47,13 @@
                 @Html.DisplayFor(modelItem => item.Patronymic)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CabinetNumber)
+                @Html.DisplayFor(modelItem => item.Cabinet.Number)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AreaNumber)
+                @Html.DisplayFor(modelItem => item.Area.Number)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SpecializationName)
+                @Html.DisplayFor(modelItem => item.Spec.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

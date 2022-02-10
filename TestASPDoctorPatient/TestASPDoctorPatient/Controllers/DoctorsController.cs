@@ -28,12 +28,14 @@ namespace TestASPDoctorPatient.Controllers
         {
             var doctors = await _doctorStore.GetDoctors();
 
-            List<Models.Doctor> docs =  new List < Models.Doctor >();
+            List<Models.Doctor> docs =  new();
 
             foreach (var d in doctors)
             {
                 docs.Add(Mapper.MapFromData(d));
             }
+            
+//            docs = docs.OrderBy(d => d.LastName).ToList();
 
             return View(docs);
         }

@@ -18,19 +18,45 @@ namespace TestASPDoctorPatient.Data.Stores
             _context = context;
         }
 
-        // GET: Doctors
-        public async Task<IEnumerable<Doctor>> GetDoctors()
+        // Возвращает список всех врачей 
+        // список упорядочен по фамилии
+
+        public async Task<IEnumerable<Doctor>> GetDoctors() => await GetDoctors(-1, -1);
+
+        //{
+
+        //    //var query = _context.Doctors
+        //    //    .Include(d => d.Cabinet)
+        //    //    .Include(a => a.Area)
+        //    //    .Include(s => s.Spec)
+        //    //    .OrderBy(d => d.LastName);
+
+        //    //return await query.ToListAsync();
+        //    //return await GetDoctors(-1, -1);
+
+        //}
+
+
+        // Возвращает список врачей начиная с позции idStart
+        // количество записей = number, список упорядочен по фамилии
+        public async Task<IEnumerable<Doctor>> GetDoctors(int idStart, int number)
         {
 
             var query = _context.Doctors
-                .Include(d => d.Cabinet)
+                .Include(c => c.Cabinet)
                 .Include(a => a.Area)
-                .Include(s => s.Spec);
+                .Include(s => s.Spec)
+                .OrderBy(d => d.LastName);
 
-            return await query.ToListAsync();
+            var count = await query.CountAsync();
+            var doctors = await query.Skip((idStart <= 0 ? 1 : idStart) - 1).Take(number <= 0 ? count : number).ToListAsync();
+
+            return doctors;
 
         }
-        // GET: Doctor (ID)
+
+        // Возвращает врача по id
+
         public async Task<Doctor> GetDoctor(int? id)
         {
             if (id == null)
@@ -43,12 +69,47 @@ namespace TestASPDoctorPatient.Data.Stores
                 .Include(a => a.Area)
                 .Include(s => s.Spec)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (doctor == null)
-            {
-                return null;
-            }
 
             return doctor;
+        }
+
+        public async Task<Doctor> AddDoctor(Doctor doctor)
+        {
+
+            _context.Add(doctor);
+            await _context.SaveChangesAsync();
+
+            doctor = await _context.Doctors
+                .Include(d => d.Cabinet)
+                .Include(a => a.Area)
+                .Include(s => s.Spec)
+                .FirstOrDefaultAsync(m => m.ID == doctor.ID);
+
+            return doctor;
+        }
+
+        public async Task<Doctor> PutDoctor(Doctor doctor)
+        {
+
+            _context.Update(doctor);
+            await _context.SaveChangesAsync();
+
+            doctor = await _context.Doctors
+                .Include(d => d.Cabinet)
+                .Include(a => a.Area)
+                .Include(s => s.Spec)
+                .FirstOrDefaultAsync(m => m.ID == doctor.ID);
+
+            return doctor;
+        }
+
+        public async Task DeleteDoctor(Doctor doctor)
+        {
+
+            _context.Doctors.Remove(doctor);
+            await _context.SaveChangesAsync();
+
+            return ;
         }
 
     }
