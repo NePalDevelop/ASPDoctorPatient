@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TestASPDoctorPatient.Data.Stores;
 using TestASPDoctorPatient.Helpers;
@@ -25,14 +26,7 @@ namespace TestASPDoctorPatient.Controllers
         {
             var patients = await _patientStore.GetPatients();
 
-            List<Patient> pats = new();
-
-            foreach (var p in patients)
-            {
-                pats.Add(Mapper.MapPatientFromData(p));
-            }
-
-            return pats;
+            return patients.Select(Mapper.MapPatientFromData).ToList();
         }
 
         // GET api/<PatientController>/5
@@ -50,7 +44,6 @@ namespace TestASPDoctorPatient.Controllers
             return Mapper.MapPatientFromData(patient);
         }
 
-
         // GET api/<PatientController>/5/5
         // Возвращает постранично список докторов
         // Список упорядочен по фамилии - SecondName
@@ -60,9 +53,10 @@ namespace TestASPDoctorPatient.Controllers
         [HttpGet("{pageIndex}/{pageSize}")]
         public async Task<ActionResult<IEnumerable<Patient>>> PaginatedGetPatient(int pageIndex, int pageSize)
         {
-
-            pageIndex = pageIndex < 1 ? 1 : pageIndex;
-            pageSize = pageSize < 1 ? 5 : pageSize;
+            if (pageIndex < 1 || pageSize < 1)
+            {
+                return BadRequest("Некорректно заданы параметры страницы");
+            }
 
             var patients = await _patientStore.GetPatients((pageIndex - 1) * pageSize, pageSize);
 
@@ -71,17 +65,8 @@ namespace TestASPDoctorPatient.Controllers
                 return NotFound();
             }
 
-            List<Patient> pats = new();
-
-            foreach (var p in patients)
-            {
-                pats.Add(Mapper.MapPatientFromData(p));
-            }
-
-            return pats;
+            return patients.Select(Mapper.MapPatientFromData).ToList();
         }
-
-
 
         // POST api/<PatientController>
         [HttpPost]

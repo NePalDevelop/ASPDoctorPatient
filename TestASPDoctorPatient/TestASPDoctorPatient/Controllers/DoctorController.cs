@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TestASPDoctorPatient.Data.Stores;
 using TestASPDoctorPatient.Helpers;
 using TestASPDoctorPatient.Models;
-
-
 
 
 namespace TestASPDoctorPatient.Controllers
@@ -27,14 +26,7 @@ namespace TestASPDoctorPatient.Controllers
         {
             var doctors = await _doctorStore.GetDoctors();
 
-            List<Doctor> docs = new();
-
-            foreach (var d in doctors)
-            {
-                docs.Add(Mapper.MapDoctorFromData(d));
-            }
-
-            return docs;
+            return doctors.Select(Mapper.MapDoctorFromData).ToList();
         }
 
 
@@ -53,40 +45,19 @@ namespace TestASPDoctorPatient.Controllers
             return Mapper.MapDoctorFromData(doctor);
         }
 
-        //// GET api/<DoctorController>/5/5
-        //[HttpGet("{startid}/{number}")]
-        //public async Task<ActionResult<IEnumerable<Doctor>>> Get(int startid, int number)
-        //{
-
-        //    var doctors = await _doctorStore.GetDoctors(startid, number);
-
-        //    if (doctors == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    List<Doctor> docs = new();
-
-        //    foreach (var d in doctors)
-        //    {
-        //        docs.Add(Mapper.MapFromData(d));
-        //    }
-
-        //    return docs;
-        //}
 
         // GET api/<DoctorController>/5/5
         // Возвращает постранично список докторов
         // Список упорядочен по фамилии - SecondName
         // Входные параметры pageIndex - номер запрашиваемой страницы
         // pageSize - количество строк на странице
-
         [HttpGet("{pageIndex}/{pageSize}")]
         public async Task<ActionResult<IEnumerable<Doctor>>> PaginatedGetDoctor(int pageIndex, int pageSize)
         {
-
-            pageIndex = pageIndex < 1 ? 1 : pageIndex;
-            pageSize = pageSize < 1 ? 5 : pageSize;
+            if (pageIndex < 1 || pageSize < 1)
+            {
+                return BadRequest("Некорректно заданы параметры страницы");
+            }
 
             var doctors = await _doctorStore.GetDoctors((pageIndex - 1) * pageSize, pageSize);
 
@@ -95,18 +66,8 @@ namespace TestASPDoctorPatient.Controllers
                 return NotFound();
             }
 
-            List<Doctor> docs = new();
-
-            foreach (var d in doctors)
-            {
-                docs.Add(Mapper.MapDoctorFromData(d));
-            }
-
-            return docs;
+            return doctors.Select(Mapper.MapDoctorFromData).ToList();
         }
-
-
-
 
         // POST api/<DoctorController>
         [HttpPost]
@@ -122,7 +83,6 @@ namespace TestASPDoctorPatient.Controllers
             }
             return ValidationProblem();
         }
-
 
         // PUT api/<DoctorController>/5
         [HttpPut]
@@ -160,7 +120,6 @@ namespace TestASPDoctorPatient.Controllers
 
             return Ok();
         }
-
 
     }
 }
