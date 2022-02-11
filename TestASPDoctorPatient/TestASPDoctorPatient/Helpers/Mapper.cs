@@ -1,6 +1,5 @@
 ﻿using TestASPDoctorPatient.Models;
 
-
 namespace TestASPDoctorPatient.Helpers
 {
     public static class Mapper

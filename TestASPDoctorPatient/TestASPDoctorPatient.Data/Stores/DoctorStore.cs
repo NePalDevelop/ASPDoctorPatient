@@ -88,7 +88,7 @@ namespace TestASPDoctorPatient.Data.Stores
 
         // Изменение данных у врача
 
-        public async Task<Doctor> PutDoctor(Doctor doctor)
+        public async Task<Doctor> UpdateDoctor(Doctor doctor)
         {
             if (!DoctorExists(doctor.ID))
             {

@@ -2,25 +2,16 @@
 using TestASPDoctorPatient.Data.Enums;
 using System.Linq;
 
-
 namespace TestASPDoctorPatient.Data.Models
 {
     public static class DbInitializer
     {
         public static void Initialize(DPContext context)
         {
-
-            //if (context.Patients.Any())
-            //{
-            //    context.Database.EnsureDeleted();
-            //    // DB has been deleted
-            //}
-
             context.Database.EnsureCreated();
 
             if (context.Patients.Any())
             {
-  
                 return;   // DB has been seeded
             }
 
@@ -46,7 +37,7 @@ namespace TestASPDoctorPatient.Data.Models
                 new ServiceArea {Number = "D"},
                 new ServiceArea {Number = "E"}
             };
-            foreach (ServiceArea a in areas)
+            foreach (var a in areas)
             {
                 context.Areas.Add(a);
             }
@@ -60,7 +51,7 @@ namespace TestASPDoctorPatient.Data.Models
                 new Specialization {Name = "Отоларинголог"},
                 new Specialization {Name = "Невролог"}
             };
-            foreach (Specialization s in specs)
+            foreach (var s in specs)
             {
                 context.Specializations.Add(s);
             }
@@ -81,13 +72,11 @@ namespace TestASPDoctorPatient.Data.Models
                 new Doctor {LastName = "Стоянова", FirstName = "Вера", Patronymic = "Ивановна", CabinetID = 5, SpecializationID = 5}
             };
             
-            foreach (Doctor d in doctors)
+            foreach (var d in doctors)
             {
                 context.Doctors.Add(d);
             }
             context.SaveChanges();
-
-
 
             var patietns = new Patient[]
             {
@@ -103,7 +92,7 @@ namespace TestASPDoctorPatient.Data.Models
             new Patient{LastName="Загитов",FirstName="Дамир",Patronymic = "Радикович", Address ="Москва", Birthdate=DateTime.Parse("2011-09-13"), Gender = Gender.Man, AreaID = 5}
             };
 
-            foreach (Patient p in patietns)
+            foreach (var p in patietns)
             {
                 context.Patients.Add(p);
             }

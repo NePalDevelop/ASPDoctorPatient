@@ -6,14 +6,12 @@ using TestASPDoctorPatient.Data.Stores;
 using TestASPDoctorPatient.Helpers;
 using TestASPDoctorPatient.Models;
 
-
 namespace TestASPDoctorPatient.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class DoctorController : ControllerBase
     {
-
         private readonly DoctorStore _doctorStore;
 
         public DoctorController(DoctorStore doctor)
@@ -21,7 +19,7 @@ namespace TestASPDoctorPatient.Controllers
             _doctorStore = doctor;
         }
 
-        // GET: api/<DoctorController>
+        // GET: api/Doctor
         public async Task<ActionResult<IEnumerable<Doctor>>> Get()
         {
             var doctors = await _doctorStore.GetDoctors();
@@ -29,8 +27,7 @@ namespace TestASPDoctorPatient.Controllers
             return doctors.Select(Mapper.MapDoctorFromData).ToList();
         }
 
-
-        // GET api/<DoctorController>/5
+        // GET api/Doctor/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Doctor>> Get(int id)
         {
@@ -45,8 +42,7 @@ namespace TestASPDoctorPatient.Controllers
             return Mapper.MapDoctorFromData(doctor);
         }
 
-
-        // GET api/<DoctorController>/5/5
+        // GET api/Doctor/5/5
         // Возвращает постранично список докторов
         // Список упорядочен по фамилии - SecondName
         // Входные параметры pageIndex - номер запрашиваемой страницы
@@ -69,43 +65,41 @@ namespace TestASPDoctorPatient.Controllers
             return doctors.Select(Mapper.MapDoctorFromData).ToList();
         }
 
-        // POST api/<DoctorController>
+        // POST api/Doctor
         [HttpPost]
 
         public async Task<ActionResult<Doctor>> CreateDoctor([FromBody] Doctor doctor)
         {
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                Data.Models.Doctor _doctor = Mapper.MapDoctorToData(doctor);
-                _doctor = await _doctorStore.AddDoctor(_doctor);
-                return Mapper.MapDoctorFromData(_doctor);
+                return ValidationProblem();    
             }
-            return ValidationProblem();
+                        
+            var createdDoctor = await _doctorStore.AddDoctor(Mapper.MapDoctorToData(doctor));
+
+            return Created("/api/doctor", Mapper.MapDoctorFromData(createdDoctor));
         }
 
-        // PUT api/<DoctorController>/5
+        // PUT api/Doctor/5
         [HttpPut]
-        public async Task<ActionResult<Doctor>> PutDoctor([FromBody] Doctor doctor)
+        public async Task<ActionResult<Doctor>> UpateDoctor([FromBody] Doctor doctor)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                Data.Models.Doctor _doctor = Mapper.MapDoctorToData(doctor);
-                
-                _doctor = await _doctorStore.PutDoctor(_doctor);
+                return ValidationProblem();
+            }
 
-                if (_doctor == null)
+                var createdDoctor = await _doctorStore.UpdateDoctor(Mapper.MapDoctorToData(doctor));
+
+                if (createdDoctor == null)
                 {
                     return NotFound();
                 }
-
-                return Mapper.MapDoctorFromData(_doctor);
-            }
-            return ValidationProblem();
-
+                return Mapper.MapDoctorFromData(createdDoctor);
         }
 
-        // DELETE api/<DoctorController>/5
+        // DELETE api/Doctor/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteDoctor(int id)
         {
@@ -120,6 +114,5 @@ namespace TestASPDoctorPatient.Controllers
 
             return Ok();
         }
-
     }
 }
