@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TestASPDoctorPatient.Data.Models;
 
 namespace TestASPDoctorPatient.Data
@@ -15,13 +14,6 @@ namespace TestASPDoctorPatient.Data
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Cabinet> Cabinets { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Cabinet>()
-                .HasMany(c => c.Doctors)
-                .WithOne(d => d.Cabinet);
-        }
 
     }
 }

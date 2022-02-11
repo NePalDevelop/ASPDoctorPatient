@@ -17,7 +17,7 @@ namespace TestASPDoctorPatient.Helper
                 Patronymic = doctor.Patronymic,
                 Cabinet = doctor.Cabinet == null ? null : new Cabinet { ID = doctor.Cabinet.ID, Number = doctor.Cabinet.Number },
                 Area = doctor.Area == null ? null : new ServiceArea { ID = doctor.Area.ID, Number = doctor.Area.Number },
-                Spec = doctor.Spec == null ? null : new Specialization { ID = doctor.SpecID, Name = doctor.Spec.Name }
+                SpecializationID = doctor.Specialization == null ? null : new Specialization { ID = doctor.SpecializationID, Name = doctor.Specialization.Name }
             };
         }
 
@@ -33,7 +33,7 @@ namespace TestASPDoctorPatient.Helper
                 Patronymic = doctor.Patronymic,
                 CabinetID = doctor.Cabinet?.ID,
                 AreaID = doctor.Area?.ID,
-                SpecID = doctor.Spec.ID
+                SpecializationID = doctor.SpecializationID.ID
             };
         }
 

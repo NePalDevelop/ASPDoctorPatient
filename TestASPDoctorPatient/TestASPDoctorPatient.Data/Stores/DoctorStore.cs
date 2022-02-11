@@ -24,7 +24,7 @@ namespace TestASPDoctorPatient.Data.Stores
             var query = _context.Doctors
                 .Include(c => c.Cabinet)
                 .Include(a => a.Area)
-                .Include(s => s.Spec)
+                .Include(s => s.Specialization)
                 .OrderBy(d => d.LastName);
 
             return await query.ToListAsync();
@@ -42,7 +42,7 @@ namespace TestASPDoctorPatient.Data.Stores
             var query = _context.Doctors
                 .Include(c => c.Cabinet)
                 .Include(a => a.Area)
-                .Include(s => s.Spec)
+                .Include(s => s.Specialization)
                 .OrderBy(d => d.LastName);
 
             var doctors = await query.Skip(skipID).Take(number).ToListAsync();
@@ -63,7 +63,7 @@ namespace TestASPDoctorPatient.Data.Stores
             var doctor = await _context.Doctors
                 .Include(c => c.Cabinet)
                 .Include(a => a.Area)
-                .Include(s => s.Spec)
+                .Include(s => s.Specialization)
                 .FirstOrDefaultAsync(d => d.ID == id);
 
             return doctor;
@@ -80,7 +80,7 @@ namespace TestASPDoctorPatient.Data.Stores
             doctor = await _context.Doctors
                 .Include(d => d.Cabinet)
                 .Include(a => a.Area)
-                .Include(s => s.Spec)
+                .Include(s => s.Specialization)
                 .FirstOrDefaultAsync(m => m.ID == doctor.ID);
 
             return doctor;
@@ -90,6 +90,10 @@ namespace TestASPDoctorPatient.Data.Stores
 
         public async Task<Doctor> PutDoctor(Doctor doctor)
         {
+            if (!DoctorExists(doctor.ID))
+            {
+                return null;
+            }
 
             _context.Update(doctor);
             await _context.SaveChangesAsync();
@@ -97,7 +101,7 @@ namespace TestASPDoctorPatient.Data.Stores
             doctor = await _context.Doctors
                 .Include(d => d.Cabinet)
                 .Include(a => a.Area)
-                .Include(s => s.Spec)
+                .Include(s => s.Specialization)
                 .FirstOrDefaultAsync(m => m.ID == doctor.ID);
 
             return doctor;
@@ -113,6 +117,10 @@ namespace TestASPDoctorPatient.Data.Stores
 
             return ;
         }
-
+        
+        private bool DoctorExists(int id)
+        {
+            return _context.Doctors.Any(e => e.ID == id);
+        }
     }
 }

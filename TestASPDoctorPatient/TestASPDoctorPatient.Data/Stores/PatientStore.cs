@@ -83,6 +83,12 @@ namespace TestASPDoctorPatient.Data.Stores
         public async Task<Patient> PutPatient(Patient patient)
         {
 
+            if ( !PatientExists(patient.ID) )
+            {
+                return null;
+            }
+
+
             _context.Update(patient);
             await _context.SaveChangesAsync();
 
@@ -104,6 +110,10 @@ namespace TestASPDoctorPatient.Data.Stores
             return;
         }
 
+        private bool PatientExists(int id)
+        {
+            return _context.Patients.Any(e => e.ID == id);
+        }
 
     }
 }

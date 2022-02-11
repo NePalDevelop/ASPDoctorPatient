@@ -19,8 +19,8 @@ namespace TestASPDoctorPatient.Data.Models
         public int? AreaID { get; set; }
         public ServiceArea Area { get; set; }
 
-        public int SpecID { get; set; } 
-        public Specialization Spec { get; set; }
+        public int SpecializationID { get; set; } 
+        public Specialization Specialization { get; set; }
 
     }
 }

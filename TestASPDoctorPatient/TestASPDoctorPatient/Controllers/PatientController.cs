@@ -95,7 +95,7 @@ namespace TestASPDoctorPatient.Controllers
                 _patient = await _patientStore.AddPatient(_patient);
                 return Mapper.MapPatientFromData(_patient);
             }
-            return patient;
+            return ValidationProblem();
         }
 
         // PUT api/<PatientController>/5
@@ -105,10 +105,18 @@ namespace TestASPDoctorPatient.Controllers
             if (ModelState.IsValid)
             {
                 Data.Models.Patient _patient = Mapper.MapPatientToData(patient);
+
                 _patient = await _patientStore.PutPatient(_patient);
+
+                if (_patient == null)
+                {
+                    return NotFound();
+                }
+
                 return Mapper.MapPatientFromData(_patient);
             }
-            return patient;
+            
+            return ValidationProblem();
 
         }
 
@@ -119,7 +127,10 @@ namespace TestASPDoctorPatient.Controllers
             var patient = await _patientStore.GetPatient(id);
 
             if (patient == null)
+            {
                 return NotFound();
+            }
+
             await _patientStore.DeletePatient(patient);
 
             return Ok();

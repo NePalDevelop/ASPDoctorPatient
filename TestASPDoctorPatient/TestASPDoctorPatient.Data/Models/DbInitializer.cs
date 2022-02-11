@@ -1,8 +1,7 @@
 ﻿using System;
 using TestASPDoctorPatient.Data.Enums;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace TestASPDoctorPatient.Data.Models
 {
@@ -11,11 +10,11 @@ namespace TestASPDoctorPatient.Data.Models
         public static void Initialize(DPContext context)
         {
 
-            //if (context.Patients.Any())
-            //{
-            //    context.Database.EnsureDeleted();
-            //     // DB has been deleted
-            //}
+            if (context.Patients.Any())
+            {
+                context.Database.EnsureDeleted();
+                // DB has been deleted
+            }
 
             context.Database.EnsureCreated();
 
@@ -69,17 +68,17 @@ namespace TestASPDoctorPatient.Data.Models
 
             var doctors = new Doctor[] 
             { 
-                new Doctor {LastName = "Иванов", FirstName = "Сергей", Patronymic = "Петрович",AreaID = 1, CabinetID = 1, SpecID = 1},
-                new Doctor {LastName = "Скворцова", FirstName = "Ирина", Patronymic = "Ивановна",AreaID = 2, CabinetID = 2, SpecID = 1},
-                new Doctor {LastName = "Сидоров", FirstName = "Петр", Patronymic = "Ильич",AreaID = 3, CabinetID = 1, SpecID = 1},
-                new Doctor {LastName = "Чернов", FirstName = "Иван", Patronymic = "Петрович",AreaID = 4, CabinetID = 2, SpecID = 1},
-                new Doctor {LastName = "Котова", FirstName = "Полина", Patronymic = "Павловна",AreaID = 5, CabinetID = 1, SpecID = 1},
-                new Doctor {LastName = "Мальцева", FirstName = "Антонина", Patronymic = "Ивановна", CabinetID = 3, SpecID = 2},
-                new Doctor {LastName = "Дронов", FirstName = "Илья", Patronymic = "Семенович", CabinetID = 3, SpecID = 2},
-                new Doctor {LastName = "Дронова", FirstName = "Мария", Patronymic = "Федоровна", CabinetID = 4, SpecID = 3},
-                new Doctor {LastName = "Кулик", FirstName = "Федор", Patronymic = "Степанович", CabinetID = 4, SpecID = 3},
-                new Doctor {LastName = "Ступак", FirstName = "Татьяна", Patronymic = "Александровна", CabinetID = 5, SpecID = 4},
-                new Doctor {LastName = "Стоянова", FirstName = "Вера", Patronymic = "Ивановна", CabinetID = 5, SpecID = 5}
+                new Doctor {LastName = "Иванов", FirstName = "Сергей", Patronymic = "Петрович",AreaID = 1, CabinetID = 1, SpecializationID = 1},
+                new Doctor {LastName = "Скворцова", FirstName = "Ирина", Patronymic = "Ивановна",AreaID = 2, CabinetID = 2, SpecializationID = 1},
+                new Doctor {LastName = "Сидоров", FirstName = "Петр", Patronymic = "Ильич",AreaID = 3, CabinetID = 1, SpecializationID = 1},
+                new Doctor {LastName = "Чернов", FirstName = "Иван", Patronymic = "Петрович",AreaID = 4, CabinetID = 2, SpecializationID = 1},
+                new Doctor {LastName = "Котова", FirstName = "Полина", Patronymic = "Павловна",AreaID = 5, CabinetID = 1, SpecializationID = 1},
+                new Doctor {LastName = "Мальцева", FirstName = "Антонина", Patronymic = "Ивановна", CabinetID = 3, SpecializationID = 2},
+                new Doctor {LastName = "Дронов", FirstName = "Илья", Patronymic = "Семенович", CabinetID = 3, SpecializationID = 2},
+                new Doctor {LastName = "Дронова", FirstName = "Мария", Patronymic = "Федоровна", CabinetID = 4, SpecializationID = 3},
+                new Doctor {LastName = "Кулик", FirstName = "Федор", Patronymic = "Степанович", CabinetID = 4, SpecializationID = 3},
+                new Doctor {LastName = "Ступак", FirstName = "Татьяна", Patronymic = "Александровна", CabinetID = 5, SpecializationID = 4},
+                new Doctor {LastName = "Стоянова", FirstName = "Вера", Patronymic = "Ивановна", CabinetID = 5, SpecializationID = 5}
             };
             
             foreach (Doctor d in doctors)

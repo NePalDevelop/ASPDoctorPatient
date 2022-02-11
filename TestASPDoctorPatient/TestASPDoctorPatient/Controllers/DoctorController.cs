@@ -120,7 +120,7 @@ namespace TestASPDoctorPatient.Controllers
                 _doctor = await _doctorStore.AddDoctor(_doctor);
                 return Mapper.MapDoctorFromData(_doctor);
             }
-            return doctor;
+            return ValidationProblem();
         }
 
 
@@ -131,10 +131,17 @@ namespace TestASPDoctorPatient.Controllers
             if (ModelState.IsValid)
             {
                 Data.Models.Doctor _doctor = Mapper.MapDoctorToData(doctor);
+                
                 _doctor = await _doctorStore.PutDoctor(_doctor);
+
+                if (_doctor == null)
+                {
+                    return NotFound();
+                }
+
                 return Mapper.MapDoctorFromData(_doctor);
             }
-            return doctor;
+            return ValidationProblem();
 
         }
 
@@ -145,7 +152,10 @@ namespace TestASPDoctorPatient.Controllers
             var doctor = await _doctorStore.GetDoctor(id);
 
             if (doctor == null)
+            {
                 return NotFound();
+            }
+
             await _doctorStore.DeleteDoctor(doctor);
 
             return Ok();
