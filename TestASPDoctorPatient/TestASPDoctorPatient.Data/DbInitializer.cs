@@ -24,10 +24,12 @@ namespace TestASPDoctorPatient.Data
                 new Cabinet {Number = "3"},
                 new Cabinet {Number = "4"}
             };
+
             foreach (var c in cabinets)
             {
                 context.Cabinets.Add(c); 
             }
+
             context.SaveChanges();
 
             var areas = new ServiceArea[]
@@ -38,10 +40,12 @@ namespace TestASPDoctorPatient.Data
                 new ServiceArea {Number = "D"},
                 new ServiceArea {Number = "E"}
             };
+
             foreach (var a in areas)
             {
                 context.Areas.Add(a);
             }
+
             context.SaveChanges();
 
             var specs = new Specialization[]
@@ -52,10 +56,12 @@ namespace TestASPDoctorPatient.Data
                 new Specialization {Name = "Отоларинголог"},
                 new Specialization {Name = "Невролог"}
             };
+
             foreach (var s in specs)
             {
                 context.Specializations.Add(s);
             }
+
             context.SaveChanges();
 
             var doctors = new Doctor[] 
@@ -77,6 +83,7 @@ namespace TestASPDoctorPatient.Data
             {
                 context.Doctors.Add(d);
             }
+
             context.SaveChanges();
 
             var patients = new Patient[]
@@ -97,6 +104,7 @@ namespace TestASPDoctorPatient.Data
             {
                 context.Patients.Add(p);
             }
+
             context.SaveChanges();
         }
     }

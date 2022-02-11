@@ -68,7 +68,6 @@ namespace TestASPDoctorPatient.Controllers
 
         // POST api/Doctor
         [HttpPost]
-
         public async Task<ActionResult<Doctor>> CreateDoctor([FromBody] Doctor doctor)
         {
             if (!ModelState.IsValid)
@@ -96,6 +95,7 @@ namespace TestASPDoctorPatient.Controllers
             {
                 return NotFound();
             }
+
             return Mapper.MapDoctorFromData(updatedDoctor);
         }
 

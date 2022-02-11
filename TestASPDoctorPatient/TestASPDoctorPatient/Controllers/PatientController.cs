@@ -37,6 +37,7 @@ namespace TestASPDoctorPatient.Controllers
             {
                 return NotFound();
             }
+
             return Mapper.MapPatientFromData(patient);
         }
 
@@ -61,6 +62,7 @@ namespace TestASPDoctorPatient.Controllers
             {
                 return NotFound();
             }
+
             return patients.Select(Mapper.MapPatientFromData).ToList();
         }
 
@@ -93,6 +95,7 @@ namespace TestASPDoctorPatient.Controllers
             {
                 return NotFound();
             }
+
             return Mapper.MapPatientFromData(updatedPatient);
         }
 
