@@ -31,7 +31,6 @@ namespace TestASPDoctorPatient.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Doctor>> Get(int id)
         {
-
             var doctor = await _doctorStore.GetDoctor(id);
 
             if (doctor == null)
@@ -72,12 +71,11 @@ namespace TestASPDoctorPatient.Controllers
 
         public async Task<ActionResult<Doctor>> CreateDoctor([FromBody] Doctor doctor)
         {
-
             if (!ModelState.IsValid)
             {
-                return ValidationProblem();    
+                return ValidationProblem();
             }
-                        
+
             var createdDoctor = await _doctorStore.AddDoctor(Mapper.MapDoctorToData(doctor));
 
             return Created("/api/doctor", Mapper.MapDoctorFromData(createdDoctor));
@@ -85,20 +83,20 @@ namespace TestASPDoctorPatient.Controllers
 
         // PUT api/Doctor/5
         [HttpPut]
-        public async Task<ActionResult<Doctor>> UpateDoctor([FromBody] Doctor doctor)
+        public async Task<ActionResult<Doctor>> UpdateDoctor([FromBody] Doctor doctor)
         {
             if (!ModelState.IsValid)
             {
                 return ValidationProblem();
             }
 
-                var createdDoctor = await _doctorStore.UpdateDoctor(Mapper.MapDoctorToData(doctor));
+            var createdDoctor = await _doctorStore.UpdateDoctor(Mapper.MapDoctorToData(doctor));
 
-                if (createdDoctor == null)
-                {
-                    return NotFound();
-                }
-                return Mapper.MapDoctorFromData(createdDoctor);
+            if (createdDoctor == null)
+            {
+                return NotFound();
+            }
+            return Mapper.MapDoctorFromData(createdDoctor);
         }
 
         // DELETE api/Doctor/5
