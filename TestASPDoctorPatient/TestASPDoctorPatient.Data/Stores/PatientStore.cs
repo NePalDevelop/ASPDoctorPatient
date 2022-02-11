@@ -29,7 +29,7 @@ namespace TestASPDoctorPatient.Data.Stores
         }
 
         /// <summary>
-        /// Возвращает список пациентов пропуская skipID позиций
+        /// Возвращает список пациентов пропуская skip позиций
         /// количество записей = number, список упорядочен по фамилии
         /// </summary>
         public async Task<IEnumerable<Patient>> GetPatients(int skip, int number)
@@ -49,8 +49,8 @@ namespace TestASPDoctorPatient.Data.Stores
         public async Task<Patient> GetPatient(int id)
         {
             return await _context.Patients
-                             .Include(a => a.Area)
-                             .FirstOrDefaultAsync(p => p.Id == id);
+                .Include(a => a.Area)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace TestASPDoctorPatient.Data.Stores
             await _context.SaveChangesAsync();
 
             return await _context.Patients
-                            .Include(a => a.Area)
-                            .FirstOrDefaultAsync(p => p.Id == patient.Id);
+                .Include(a => a.Area)
+                .FirstOrDefaultAsync(p => p.Id == patient.Id);
         }
 
         /// <summary>
@@ -80,8 +80,8 @@ namespace TestASPDoctorPatient.Data.Stores
             await _context.SaveChangesAsync();
 
             return await _context.Patients
-                            .Include(a => a.Area)
-                            .FirstOrDefaultAsync(p => p.Id == patient.Id);
+                .Include(a => a.Area)
+                .FirstOrDefaultAsync(p => p.Id == patient.Id);
         }
 
         /// <summary>
