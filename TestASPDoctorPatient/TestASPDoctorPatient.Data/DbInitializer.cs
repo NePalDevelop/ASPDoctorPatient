@@ -3,7 +3,6 @@ using TestASPDoctorPatient.Data.Enums;
 using System.Linq;
 using TestASPDoctorPatient.Data.Models;
 
-
 namespace TestASPDoctorPatient.Data
 {
     public static class DbInitializer

@@ -9,6 +9,5 @@ namespace TestASPDoctorPatient.Data.Models
         public string Name { get; set; }
 
         public ICollection<Doctor> Doctors { get; set; }
-
     }
 }

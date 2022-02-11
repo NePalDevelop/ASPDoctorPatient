@@ -11,6 +11,5 @@ namespace TestASPDoctorPatient.Data.Models
         public ICollection<Doctor> Doctors { get; set; }
 
         public ICollection<Patient> Patients { get; set; }
-
     }
 }

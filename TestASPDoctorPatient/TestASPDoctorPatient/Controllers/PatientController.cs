@@ -46,7 +46,7 @@ namespace TestASPDoctorPatient.Controllers
         /// Входные параметры pageIndex - номер запрашиваемой страницы
         /// pageSize - количество строк на странице
         /// </summary>
-         // GET api/Patient/5/5
+        // GET api/Patient/5/5
         [HttpGet("{pageIndex}/{pageSize}")]
         public async Task<ActionResult<IEnumerable<Patient>>> PaginatedGetPatient(int pageIndex, int pageSize)
         {
@@ -111,7 +111,6 @@ namespace TestASPDoctorPatient.Controllers
 
             return Ok();
         }
-
     }
 }
 
