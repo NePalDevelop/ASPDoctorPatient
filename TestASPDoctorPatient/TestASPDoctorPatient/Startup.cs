@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using TestASPDoctorPatient.Data;
 using TestASPDoctorPatient.Data.Stores;
 
-
 namespace TestASPDoctorPatient
 {
     public class Startup
