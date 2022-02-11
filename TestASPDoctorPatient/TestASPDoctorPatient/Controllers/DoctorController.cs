@@ -90,13 +90,13 @@ namespace TestASPDoctorPatient.Controllers
                 return ValidationProblem();
             }
 
-            var createdDoctor = await _doctorStore.UpdateDoctor(Mapper.MapDoctorToData(doctor));
+            var updatedDoctor = await _doctorStore.UpdateDoctor(Mapper.MapDoctorToData(doctor));
 
-            if (createdDoctor == null)
+            if (updatedDoctor == null)
             {
                 return NotFound();
             }
-            return Mapper.MapDoctorFromData(createdDoctor);
+            return Mapper.MapDoctorFromData(updatedDoctor);
         }
 
         // DELETE api/Doctor/5

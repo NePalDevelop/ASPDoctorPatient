@@ -1,10 +1,9 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
 using Microsoft.Extensions.DependencyInjection;
 using TestASPDoctorPatient.Data;
-using TestASPDoctorPatient.Data.Models;
 
 namespace TestASPDoctorPatient
 {
@@ -26,13 +25,13 @@ namespace TestASPDoctorPatient
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<DPContext>();
+                    var context = services.GetRequiredService<HospitalContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred creating the DB.");
+                    logger.LogError(ex, "An error occurred creating the DB");
                 }
             }
         }

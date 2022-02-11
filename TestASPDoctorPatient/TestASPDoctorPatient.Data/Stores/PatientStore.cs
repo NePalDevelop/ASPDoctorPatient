@@ -8,9 +8,9 @@ namespace TestASPDoctorPatient.Data.Stores
 {
     public class PatientStore
     {
-        private readonly DPContext _context;
+        private readonly HospitalContext _context;
 
-        public PatientStore(DPContext context)
+        public PatientStore(HospitalContext context)
         {
             _context = context;
         }
@@ -100,6 +100,5 @@ namespace TestASPDoctorPatient.Data.Stores
         {
             return await _context.Patients.AnyAsync(e => e.Id == id);
         }
-
     }
 }

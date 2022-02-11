@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
 namespace TestASPDoctorPatient.Data.Models
-
 {
     public class Cabinet
     {

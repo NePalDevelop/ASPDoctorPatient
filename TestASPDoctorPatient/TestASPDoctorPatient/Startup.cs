@@ -19,7 +19,7 @@ namespace TestASPDoctorPatient
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<HospitalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<DoctorStore>();
             services.AddScoped<PatientStore>();
             services.AddControllers();
@@ -29,9 +29,7 @@ namespace TestASPDoctorPatient
         {
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();});
+            app.UseEndpoints(endpoints =>{endpoints.MapControllers();});
         }
     }
 }

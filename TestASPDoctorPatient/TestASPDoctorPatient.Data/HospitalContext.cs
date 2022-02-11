@@ -3,9 +3,9 @@ using TestASPDoctorPatient.Data.Models;
 
 namespace TestASPDoctorPatient.Data
 {
-    public class DPContext : DbContext
+    public class HospitalContext : DbContext
     {
-        public DPContext(DbContextOptions<DPContext> options) : base(options)
+        public HospitalContext(DbContextOptions<HospitalContext> options) : base(options)
         {
         }
 
@@ -14,6 +14,5 @@ namespace TestASPDoctorPatient.Data
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Cabinet> Cabinets { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
-
     }
 }

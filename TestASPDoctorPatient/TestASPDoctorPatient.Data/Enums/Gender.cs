@@ -1,5 +1,4 @@
-﻿
-namespace TestASPDoctorPatient.Data.Enums
+﻿namespace TestASPDoctorPatient.Data.Enums
 {
     public enum Gender
     {

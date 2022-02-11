@@ -87,13 +87,13 @@ namespace TestASPDoctorPatient.Controllers
                 return ValidationProblem();
             }
 
-            var createdPatient = await _patientStore.UpdatePatient(Mapper.MapPatientToData(patient));
+            var updatedPatient = await _patientStore.UpdatePatient(Mapper.MapPatientToData(patient));
 
-            if (createdPatient == null)
+            if (updatedPatient == null)
             {
                 return NotFound();
             }
-            return Mapper.MapPatientFromData(createdPatient);
+            return Mapper.MapPatientFromData(updatedPatient);
         }
 
         // DELETE api/Patient/5

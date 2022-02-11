@@ -1,12 +1,14 @@
 ﻿using System;
 using TestASPDoctorPatient.Data.Enums;
 using System.Linq;
+using TestASPDoctorPatient.Data.Models;
 
-namespace TestASPDoctorPatient.Data.Models
+
+namespace TestASPDoctorPatient.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(DPContext context)
+        public static void Initialize(HospitalContext context)
         {
             context.Database.EnsureCreated();
 
@@ -23,7 +25,7 @@ namespace TestASPDoctorPatient.Data.Models
                 new Cabinet {Number = "3"},
                 new Cabinet {Number = "4"}
             };
-            foreach (Cabinet c in cabinets)
+            foreach (var c in cabinets)
             {
                 context.Cabinets.Add(c); 
             }
@@ -78,7 +80,7 @@ namespace TestASPDoctorPatient.Data.Models
             }
             context.SaveChanges();
 
-            var patietns = new Patient[]
+            var patients = new Patient[]
             {
             new Patient{LastName="Крутов",FirstName="Владимир",Patronymic = "Сидорович", Address ="Москва", Birthdate=DateTime.Parse("1982-09-01"), Gender = Gender.Man, AreaId = 1},
             new Patient{LastName="Крутова",FirstName="Елена",Patronymic = "Павловна", Address ="Москва", Birthdate=DateTime.Parse("1985-08-12"), Gender = Gender.Woman, AreaId = 1},
@@ -92,7 +94,7 @@ namespace TestASPDoctorPatient.Data.Models
             new Patient{LastName="Загитов",FirstName="Дамир",Patronymic = "Радикович", Address ="Москва", Birthdate=DateTime.Parse("2011-09-13"), Gender = Gender.Man, AreaId = 5}
             };
 
-            foreach (var p in patietns)
+            foreach (var p in patients)
             {
                 context.Patients.Add(p);
             }

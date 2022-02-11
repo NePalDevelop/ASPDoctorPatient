@@ -8,9 +8,9 @@ namespace TestASPDoctorPatient.Data.Stores
 {
     public class DoctorStore
     {
-        private readonly DPContext _context;
+        private readonly HospitalContext _context;
 
-        public DoctorStore(DPContext context)
+        public DoctorStore(HospitalContext context)
         {
             _context = context;
         }
@@ -28,7 +28,6 @@ namespace TestASPDoctorPatient.Data.Stores
                 .OrderBy(d => d.LastName);
 
             return await query.ToListAsync();
-
         }
 
         /// <summary>
@@ -46,7 +45,6 @@ namespace TestASPDoctorPatient.Data.Stores
             var doctors = await query.Skip(skip).Take(number).ToListAsync();
 
             return doctors;
-
         }
 
         /// <summary>

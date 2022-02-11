@@ -1,5 +1,4 @@
-﻿
-namespace TestASPDoctorPatient.Models
+﻿namespace TestASPDoctorPatient.Models
 {
     public class Specialization
     {
