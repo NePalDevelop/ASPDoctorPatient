@@ -1,7 +1,7 @@
 ﻿using TestASPDoctorPatient.Models;
 
 
-namespace TestASPDoctorPatient.Helper
+namespace TestASPDoctorPatient.Helpers
 {
     public static class Mapper
     {

@@ -10,11 +10,11 @@ namespace TestASPDoctorPatient.Data.Models
         public static void Initialize(DPContext context)
         {
 
-            if (context.Patients.Any())
-            {
-                context.Database.EnsureDeleted();
-                // DB has been deleted
-            }
+            //if (context.Patients.Any())
+            //{
+            //    context.Database.EnsureDeleted();
+            //    // DB has been deleted
+            //}
 
             context.Database.EnsureCreated();
 

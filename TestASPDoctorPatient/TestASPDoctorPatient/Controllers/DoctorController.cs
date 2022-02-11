@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestASPDoctorPatient.Data.Stores;
-using TestASPDoctorPatient.Helper;
+using TestASPDoctorPatient.Helpers;
 using TestASPDoctorPatient.Models;
 
 

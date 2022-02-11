@@ -23,4 +23,8 @@
     <ProjectReference Include="..\TestASPDoctorPatient.Data\TestASPDoctorPatient.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>
