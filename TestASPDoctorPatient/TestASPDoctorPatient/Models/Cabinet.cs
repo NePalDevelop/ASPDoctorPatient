@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TestASPDoctorPatient.Models
+﻿namespace TestASPDoctorPatient.Models
 
 {
     public class Cabinet

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TestASPDoctorPatient.Data.Enums;
 
 namespace TestASPDoctorPatient.Data.Models
