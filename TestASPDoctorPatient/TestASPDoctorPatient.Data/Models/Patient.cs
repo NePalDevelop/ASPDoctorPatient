@@ -7,7 +7,7 @@ namespace TestASPDoctorPatient.Data.Models
 
     public class Patient
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Patronymic { get; set; }
@@ -16,7 +16,7 @@ namespace TestASPDoctorPatient.Data.Models
         
         public Gender? Gender { get; set; }
 
-        public int? AreaID { get; set; }
+        public int? AreaId { get; set; }
         public ServiceArea Area { get; set; }
 
     }

@@ -40,12 +40,13 @@ namespace TestASPDoctorPatient.Controllers
             return Mapper.MapPatientFromData(patient);
         }
 
-        // GET api/Patient/5/5
-        // Возвращает постранично список пациентов
-        // Список упорядочен по фамилии - SecondName
-        // Входные параметры pageIndex - номер запрашиваемой страницы
-        // pageSize - количество строк на странице
-
+        /// <summary>
+        /// Возвращает постранично список пациентов
+        /// Список упорядочен по фамилии - SecondName
+        /// Входные параметры pageIndex - номер запрашиваемой страницы
+        /// pageSize - количество строк на странице
+        /// </summary>
+         // GET api/Patient/5/5
         [HttpGet("{pageIndex}/{pageSize}")]
         public async Task<ActionResult<IEnumerable<Patient>>> PaginatedGetPatient(int pageIndex, int pageSize)
         {

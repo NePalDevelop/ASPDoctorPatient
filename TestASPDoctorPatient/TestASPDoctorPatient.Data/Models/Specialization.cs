@@ -4,7 +4,7 @@ namespace TestASPDoctorPatient.Data.Models
 {
     public class Specialization
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<Doctor> Doctors { get; set; }

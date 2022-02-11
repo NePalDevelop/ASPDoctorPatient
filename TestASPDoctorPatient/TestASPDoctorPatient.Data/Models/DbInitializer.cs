@@ -59,17 +59,17 @@ namespace TestASPDoctorPatient.Data.Models
 
             var doctors = new Doctor[] 
             { 
-                new Doctor {LastName = "Иванов", FirstName = "Сергей", Patronymic = "Петрович",AreaID = 1, CabinetID = 1, SpecializationID = 1},
-                new Doctor {LastName = "Скворцова", FirstName = "Ирина", Patronymic = "Ивановна",AreaID = 2, CabinetID = 2, SpecializationID = 1},
-                new Doctor {LastName = "Сидоров", FirstName = "Петр", Patronymic = "Ильич",AreaID = 3, CabinetID = 1, SpecializationID = 1},
-                new Doctor {LastName = "Чернов", FirstName = "Иван", Patronymic = "Петрович",AreaID = 4, CabinetID = 2, SpecializationID = 1},
-                new Doctor {LastName = "Котова", FirstName = "Полина", Patronymic = "Павловна",AreaID = 5, CabinetID = 1, SpecializationID = 1},
-                new Doctor {LastName = "Мальцева", FirstName = "Антонина", Patronymic = "Ивановна", CabinetID = 3, SpecializationID = 2},
-                new Doctor {LastName = "Дронов", FirstName = "Илья", Patronymic = "Семенович", CabinetID = 3, SpecializationID = 2},
-                new Doctor {LastName = "Дронова", FirstName = "Мария", Patronymic = "Федоровна", CabinetID = 4, SpecializationID = 3},
-                new Doctor {LastName = "Кулик", FirstName = "Федор", Patronymic = "Степанович", CabinetID = 4, SpecializationID = 3},
-                new Doctor {LastName = "Ступак", FirstName = "Татьяна", Patronymic = "Александровна", CabinetID = 5, SpecializationID = 4},
-                new Doctor {LastName = "Стоянова", FirstName = "Вера", Patronymic = "Ивановна", CabinetID = 5, SpecializationID = 5}
+                new Doctor {LastName = "Иванов", FirstName = "Сергей", Patronymic = "Петрович",AreaId = 1, CabinetId = 1, SpecializationId = 1},
+                new Doctor {LastName = "Скворцова", FirstName = "Ирина", Patronymic = "Ивановна",AreaId = 2, CabinetId = 2, SpecializationId = 1},
+                new Doctor {LastName = "Сидоров", FirstName = "Петр", Patronymic = "Ильич",AreaId = 3, CabinetId = 1, SpecializationId = 1},
+                new Doctor {LastName = "Чернов", FirstName = "Иван", Patronymic = "Петрович",AreaId = 4, CabinetId = 2, SpecializationId = 1},
+                new Doctor {LastName = "Котова", FirstName = "Полина", Patronymic = "Павловна",AreaId = 5, CabinetId = 1, SpecializationId = 1},
+                new Doctor {LastName = "Мальцева", FirstName = "Антонина", Patronymic = "Ивановна", CabinetId = 3, SpecializationId = 2},
+                new Doctor {LastName = "Дронов", FirstName = "Илья", Patronymic = "Семенович", CabinetId = 3, SpecializationId = 2},
+                new Doctor {LastName = "Дронова", FirstName = "Мария", Patronymic = "Федоровна", CabinetId = 4, SpecializationId = 3},
+                new Doctor {LastName = "Кулик", FirstName = "Федор", Patronymic = "Степанович", CabinetId = 4, SpecializationId = 3},
+                new Doctor {LastName = "Ступак", FirstName = "Татьяна", Patronymic = "Александровна", CabinetId = 5, SpecializationId = 4},
+                new Doctor {LastName = "Стоянова", FirstName = "Вера", Patronymic = "Ивановна", CabinetId = 5, SpecializationId = 5}
             };
             
             foreach (var d in doctors)
@@ -80,16 +80,16 @@ namespace TestASPDoctorPatient.Data.Models
 
             var patietns = new Patient[]
             {
-            new Patient{LastName="Крутов",FirstName="Владимир",Patronymic = "Сидорович", Address ="Москва", Birthdate=DateTime.Parse("1982-09-01"), Gender = Gender.Man, AreaID = 1},
-            new Patient{LastName="Крутова",FirstName="Елена",Patronymic = "Павловна", Address ="Москва", Birthdate=DateTime.Parse("1985-08-12"), Gender = Gender.Woman, AreaID = 1},
-            new Patient{LastName="Васильев",FirstName="Иван",Patronymic = "Иванович", Address ="Москва", Birthdate=DateTime.Parse("2005-09-01"), Gender = Gender.Man, AreaID = 2},
-            new Patient{LastName="Голов",FirstName="Сергей",Patronymic = "Ильич", Address ="Москва", Birthdate=DateTime.Parse("2001-06-22"), Gender = Gender.Man, AreaID = 2},
-            new Patient{LastName="Крюков",FirstName="Александр",Patronymic = "Петрович", Address ="Москва", Birthdate=DateTime.Parse("1955-11-08"), Gender = Gender.Man, AreaID = 3},
-            new Patient{LastName="Машкова",FirstName="Виктория",Patronymic = "Владимировна", Address ="Москва", Birthdate=DateTime.Parse("2001-08-08"), Gender = Gender.Woman, AreaID = 3},
-            new Patient{LastName="Смолова",FirstName="Зинаида",Patronymic = "Сидоровна", Address ="Москва", Birthdate=DateTime.Parse("1965-07-07"), Gender = Gender.Woman, AreaID = 4},
-            new Patient{LastName="Валиева",FirstName="Камилла",Patronymic = "Ринатовна", Address ="Москва", Birthdate=DateTime.Parse("2007-04-08"), Gender = Gender.Woman, AreaID = 4},
-            new Patient{LastName="Медведева",FirstName="Наталья",Patronymic = "Ивановна", Address ="Москва", Birthdate=DateTime.Parse("1959-01-15"), Gender = Gender.Woman, AreaID = 5},
-            new Patient{LastName="Загитов",FirstName="Дамир",Patronymic = "Радикович", Address ="Москва", Birthdate=DateTime.Parse("2011-09-13"), Gender = Gender.Man, AreaID = 5}
+            new Patient{LastName="Крутов",FirstName="Владимир",Patronymic = "Сидорович", Address ="Москва", Birthdate=DateTime.Parse("1982-09-01"), Gender = Gender.Man, AreaId = 1},
+            new Patient{LastName="Крутова",FirstName="Елена",Patronymic = "Павловна", Address ="Москва", Birthdate=DateTime.Parse("1985-08-12"), Gender = Gender.Woman, AreaId = 1},
+            new Patient{LastName="Васильев",FirstName="Иван",Patronymic = "Иванович", Address ="Москва", Birthdate=DateTime.Parse("2005-09-01"), Gender = Gender.Man, AreaId = 2},
+            new Patient{LastName="Голов",FirstName="Сергей",Patronymic = "Ильич", Address ="Москва", Birthdate=DateTime.Parse("2001-06-22"), Gender = Gender.Man, AreaId = 2},
+            new Patient{LastName="Крюков",FirstName="Александр",Patronymic = "Петрович", Address ="Москва", Birthdate=DateTime.Parse("1955-11-08"), Gender = Gender.Man, AreaId = 3},
+            new Patient{LastName="Машкова",FirstName="Виктория",Patronymic = "Владимировна", Address ="Москва", Birthdate=DateTime.Parse("2001-08-08"), Gender = Gender.Woman, AreaId = 3},
+            new Patient{LastName="Смолова",FirstName="Зинаида",Patronymic = "Сидоровна", Address ="Москва", Birthdate=DateTime.Parse("1965-07-07"), Gender = Gender.Woman, AreaId = 4},
+            new Patient{LastName="Валиева",FirstName="Камилла",Patronymic = "Ринатовна", Address ="Москва", Birthdate=DateTime.Parse("2007-04-08"), Gender = Gender.Woman, AreaId = 4},
+            new Patient{LastName="Медведева",FirstName="Наталья",Patronymic = "Ивановна", Address ="Москва", Birthdate=DateTime.Parse("1959-01-15"), Gender = Gender.Woman, AreaId = 5},
+            new Patient{LastName="Загитов",FirstName="Дамир",Patronymic = "Радикович", Address ="Москва", Birthdate=DateTime.Parse("2011-09-13"), Gender = Gender.Man, AreaId = 5}
             };
 
             foreach (var p in patietns)

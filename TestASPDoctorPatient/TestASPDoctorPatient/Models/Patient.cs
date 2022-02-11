@@ -6,7 +6,7 @@ namespace TestASPDoctorPatient.Models
 {
     public class Patient
     {
-        public int? ID { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
@@ -17,6 +17,5 @@ namespace TestASPDoctorPatient.Models
         public Gender? Gender { get; set; }
         [Required]
         public ServiceArea Area { get; set; }
-
     }
 }

@@ -15,116 +15,91 @@ namespace TestASPDoctorPatient.Data.Stores
             _context = context;
         }
 
-        // Возвращает список всех пациентов 
-        // список упорядочен по фамилии
-
+        /// <summary>
+        /// Возвращает список всех пациентов 
+        /// список упорядочен по фамилии
+        /// </summary>
         public async Task<IEnumerable<Patient>> GetPatients()
         {
-
             var query = _context.Patients
                 .Include(a => a.Area)
                 .OrderBy(d => d.LastName);
 
             return await query.ToListAsync();
-
         }
 
-        // Возвращает список пациентов пропуская skipID позиций
-        // количество записей = number, список упорядочен по фамилии
-        public async Task<IEnumerable<Patient>> GetPatients(int skipID, int number)
+        /// <summary>
+        /// Возвращает список пациентов пропуская skipID позиций
+        /// количество записей = number, список упорядочен по фамилии
+        /// </summary>
+        public async Task<IEnumerable<Patient>> GetPatients(int skip, int number)
         {
-
             var query = _context.Patients
                 .Include(a => a.Area)
                 .OrderBy(d => d.LastName);
 
-            var patients = await query.Skip(skipID)
+            return await query.Skip(skip)
                                 .Take(number)
                                 .ToListAsync();
-
-            return patients;
-
         }
 
-
-        // Возвращает пациента по id
-
-        public async Task<Patient> GetPatient(int? id)
+        /// <summary>
+        /// Возвращает пациента по id
+        /// </summary>
+        public async Task<Patient> GetPatient(int id)
         {
-            if (id == null)
-            {
-                return null;
-            }
-
-            var patient = await _context.Patients
-                .Include(a => a.Area)
-                .FirstOrDefaultAsync(p => p.ID == id);
-
-            return patient;
+            return await _context.Patients
+                             .Include(a => a.Area)
+                             .FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        // Добавление нового пациента
-
+        /// <summary>
+        /// Добавление нового пациента
+        /// </summary>
         public async Task<Patient> AddPatient(Patient patient)
         {
-
             _context.Add(patient);
             await _context.SaveChangesAsync();
 
-            patient = await _context.Patients
-                .Include(a => a.Area)
-                .FirstOrDefaultAsync(p => p.ID == patient.ID);
-
-            return patient;
+            return await _context.Patients
+                            .Include(a => a.Area)
+                            .FirstOrDefaultAsync(p => p.Id == patient.Id);
         }
 
-        // Изменение данных у пациента
-
+        /// <summary>
+        /// Изменение данных у пациента
+        /// </summary>
         public async Task<Patient> UpdatePatient(Patient patient)
         {
-
-            if ( !PatientExists(patient.ID) )
+            if (!await PatientExists(patient.Id))
             {
                 return null;
             }
-
 
             _context.Update(patient);
             await _context.SaveChangesAsync();
 
-            patient = await _context.Patients
-                .Include(a => a.Area)
-                .FirstOrDefaultAsync(p => p.ID == patient.ID);
-
-            return patient;
+            return await _context.Patients
+                            .Include(a => a.Area)
+                            .FirstOrDefaultAsync(p => p.Id == patient.Id);
         }
 
-        // Удаление пациента 
-
+        /// <summary>
+        /// Удаление пациента 
+        /// </summary>
         public async Task DeletePatient(Patient patient)
         {
-
             _context.Patients.Remove(patient);
             await _context.SaveChangesAsync();
-
-            return;
         }
 
-        private bool PatientExists(int id)
+        /// <summary>
+        /// Проверка существования пациента по Id
+        /// </summary>
+        private async Task<bool> PatientExists(int id)
         {
-            return _context.Patients.Any(e => e.ID == id);
+            return await _context.Patients.AnyAsync(e => e.Id == id);
         }
 
     }
 }
-
-
-
-
-//=============================================================================
-/*
-
-
-    }
-}
-*/

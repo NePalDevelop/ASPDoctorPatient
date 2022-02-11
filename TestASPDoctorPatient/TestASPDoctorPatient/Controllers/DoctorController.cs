@@ -42,11 +42,13 @@ namespace TestASPDoctorPatient.Controllers
             return Mapper.MapDoctorFromData(doctor);
         }
 
+        /// <Summary>
+        /// Возвращает постранично список докторов
+        /// Список упорядочен по фамилии - SecondName
+        /// Входные параметры pageIndex - номер запрашиваемой страницы
+        /// pageSize - количество строк на странице
+        /// </Summary>
         // GET api/Doctor/5/5
-        // Возвращает постранично список докторов
-        // Список упорядочен по фамилии - SecondName
-        // Входные параметры pageIndex - номер запрашиваемой страницы
-        // pageSize - количество строк на странице
         [HttpGet("{pageIndex}/{pageSize}")]
         public async Task<ActionResult<IEnumerable<Doctor>>> PaginatedGetDoctor(int pageIndex, int pageSize)
         {
