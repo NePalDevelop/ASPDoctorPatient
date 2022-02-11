@@ -1,6 +1,5 @@
 ﻿using TestASPDoctorPatient.Models;
 
-
 namespace TestASPDoctorPatient.Helpers
 {
     public static class Mapper
@@ -11,13 +10,13 @@ namespace TestASPDoctorPatient.Helpers
 
             return new Doctor
             {
-                ID = doctor.ID,
+                Id = doctor.Id,
                 FirstName = doctor.FirstName,
                 LastName = doctor.LastName,
                 Patronymic = doctor.Patronymic,
-                Cabinet = doctor.Cabinet == null ? null : new Cabinet { ID = doctor.Cabinet.ID, Number = doctor.Cabinet.Number },
-                Area = doctor.Area == null ? null : new ServiceArea { ID = doctor.Area.ID, Number = doctor.Area.Number },
-                SpecializationID = doctor.Specialization == null ? null : new Specialization { ID = doctor.SpecializationID, Name = doctor.Specialization.Name }
+                Cabinet = doctor.Cabinet == null ? null : new Cabinet { Id = doctor.Cabinet.Id, Number = doctor.Cabinet.Number },
+                Area = doctor.Area == null ? null : new ServiceArea { Id = doctor.Area.Id, Number = doctor.Area.Number },
+                Specialization = doctor.Specialization == null ? null : new Specialization { Id = doctor.SpecializationId, Name = doctor.Specialization.Name }
             };
         }
 
@@ -27,13 +26,13 @@ namespace TestASPDoctorPatient.Helpers
 
             return new Data.Models.Doctor
             {
-                ID = doctor.ID ?? default,
+                Id = doctor.Id,
                 FirstName = doctor.FirstName,
                 LastName = doctor.LastName,
                 Patronymic = doctor.Patronymic,
-                CabinetID = doctor.Cabinet?.ID,
-                AreaID = doctor.Area?.ID,
-                SpecializationID = doctor.SpecializationID.ID
+                CabinetId = doctor.Cabinet?.Id,
+                AreaId = doctor.Area?.Id,
+                SpecializationId = doctor.Specialization.Id
             };
         }
 
@@ -43,14 +42,14 @@ namespace TestASPDoctorPatient.Helpers
 
             return new Patient
             {
-                ID = patient.ID,
+                Id = patient.Id,
                 FirstName = patient.FirstName,
                 LastName = patient.LastName,
                 Patronymic = patient.Patronymic,
                 Address = patient.Address,
                 Birthdate = patient.Birthdate,
                 Gender = patient.Gender,
-                Area = patient.Area == null ? null : new ServiceArea { ID = patient.Area.ID, Number = patient.Area.Number },
+                Area = patient.Area == null ? null : new ServiceArea { Id = patient.Area.Id, Number = patient.Area.Number },
             };
         }
 
@@ -60,14 +59,14 @@ namespace TestASPDoctorPatient.Helpers
 
             return new Data.Models.Patient
             {
-                ID = patient.ID ?? default,
+                Id = patient.Id,
                 FirstName = patient.FirstName,
                 LastName = patient.LastName,
                 Patronymic = patient.Patronymic,
                 Address = patient.Address,
                 Birthdate = patient.Birthdate,
                 Gender = patient.Gender,
-                AreaID = patient.Area?.ID
+                AreaId = patient.Area?.Id
             };
         }
     }

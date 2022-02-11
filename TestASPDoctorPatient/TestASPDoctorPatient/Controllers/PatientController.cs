@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TestASPDoctorPatient.Data.Stores;
 using TestASPDoctorPatient.Helpers;
 using TestASPDoctorPatient.Models;
-
 
 namespace TestASPDoctorPatient.Controllers
 {
@@ -12,7 +12,6 @@ namespace TestASPDoctorPatient.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-
         private readonly PatientStore _patientStore;
 
         public PatientController(PatientStore patient)
@@ -20,26 +19,18 @@ namespace TestASPDoctorPatient.Controllers
             _patientStore = patient;
         }
 
-        // GET: api/<PatientController>
+        // GET: api/Patient
         public async Task<ActionResult<IEnumerable<Patient>>> Get()
         {
             var patients = await _patientStore.GetPatients();
 
-            List<Patient> pats = new();
-
-            foreach (var p in patients)
-            {
-                pats.Add(Mapper.MapPatientFromData(p));
-            }
-
-            return pats;
+            return patients.Select(Mapper.MapPatientFromData).ToList();
         }
 
-        // GET api/<PatientController>/5
+        // GET api/Patient/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Patient>> Get(int id)
         {
-
             var patient = await _patientStore.GetPatient(id);
 
             if (patient == null)
@@ -50,19 +41,20 @@ namespace TestASPDoctorPatient.Controllers
             return Mapper.MapPatientFromData(patient);
         }
 
-
-        // GET api/<PatientController>/5/5
-        // Возвращает постранично список докторов
-        // Список упорядочен по фамилии - SecondName
-        // Входные параметры pageIndex - номер запрашиваемой страницы
-        // pageSize - количество строк на странице
-
+        /// <summary>
+        /// Возвращает постранично список пациентов
+        /// Список упорядочен по фамилии - SecondName
+        /// Входные параметры pageIndex - номер запрашиваемой страницы
+        /// pageSize - количество строк на странице
+        /// </summary>
+        // GET api/Patient/5/5
         [HttpGet("{pageIndex}/{pageSize}")]
         public async Task<ActionResult<IEnumerable<Patient>>> PaginatedGetPatient(int pageIndex, int pageSize)
         {
-
-            pageIndex = pageIndex < 1 ? 1 : pageIndex;
-            pageSize = pageSize < 1 ? 5 : pageSize;
+            if (pageIndex < 1 || pageSize < 1)
+            {
+                return BadRequest("Некорректно заданы параметры страницы");
+            }
 
             var patients = await _patientStore.GetPatients((pageIndex - 1) * pageSize, pageSize);
 
@@ -71,56 +63,43 @@ namespace TestASPDoctorPatient.Controllers
                 return NotFound();
             }
 
-            List<Patient> pats = new();
-
-            foreach (var p in patients)
-            {
-                pats.Add(Mapper.MapPatientFromData(p));
-            }
-
-            return pats;
+            return patients.Select(Mapper.MapPatientFromData).ToList();
         }
 
-
-
-        // POST api/<PatientController>
+        // POST api/Patient
         [HttpPost]
-
         public async Task<ActionResult<Patient>> CreatePatient([FromBody] Patient patient)
         {
-
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                Data.Models.Patient _patient = Mapper.MapPatientToData(patient);
-                _patient = await _patientStore.AddPatient(_patient);
-                return Mapper.MapPatientFromData(_patient);
+                return ValidationProblem();
             }
-            return ValidationProblem();
+
+            var createdPatient = await _patientStore.AddPatient(Mapper.MapPatientToData(patient));
+
+            return Mapper.MapPatientFromData(createdPatient);
         }
 
-        // PUT api/<PatientController>/5
+        // PUT api/Patient/5
         [HttpPut]
-        public async Task<ActionResult<Patient>> PutPatient([FromBody] Patient patient)
+        public async Task<ActionResult<Patient>> UpdatePatient([FromBody] Patient patient)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                Data.Models.Patient _patient = Mapper.MapPatientToData(patient);
-
-                _patient = await _patientStore.PutPatient(_patient);
-
-                if (_patient == null)
-                {
-                    return NotFound();
-                }
-
-                return Mapper.MapPatientFromData(_patient);
+                return ValidationProblem();
             }
-            
-            return ValidationProblem();
 
+            var updatedPatient = await _patientStore.UpdatePatient(Mapper.MapPatientToData(patient));
+
+            if (updatedPatient == null)
+            {
+                return NotFound();
+            }
+
+            return Mapper.MapPatientFromData(updatedPatient);
         }
 
-        // DELETE api/<PatientController>/5
+        // DELETE api/Patient/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePatient(int id)
         {
@@ -135,7 +114,6 @@ namespace TestASPDoctorPatient.Controllers
 
             return Ok();
         }
-
     }
 }
 

@@ -1,10 +1,9 @@
-﻿
-namespace TestASPDoctorPatient.Models
+﻿namespace TestASPDoctorPatient.Models
 {
     public class ServiceArea
     {
-        public int ID { get; set; }
-        public string Number { get; set; }
+        public int Id { get; set; }
 
+        public string Number { get; set; }
     }
 }
